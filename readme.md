@@ -65,21 +65,21 @@ Use the following test credentials:
 1. **Clone the repo**
 
 ```bash
-git clone https://github.com/yourusername/ideaForge.git
+git clone https://github.com/yourusername/IdeaForge.git
 cd ideaForge
 ```
 
 2. **Install frontend dependencies**
 
 ```bash
-cd client
+cd frontend
 npm install
 ```
 
 3. **Install backend dependencies**
 
 ```bash
-cd ../backend
+cd backend
 npm install
 ```
 
