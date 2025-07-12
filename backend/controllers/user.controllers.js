@@ -138,12 +138,16 @@ const getCurrentUser = async (req, res) => {
 };
 const logoutUser = async (req, res) => {
   try {
-    res.clearCookie("accessToken", {
-      httpOnly: true,
-    });
-    res.clearCookie("refreshToken", {
-      httpOnly: true,
-    });
+   res.clearCookie("accessToken", {
+  httpOnly: true,
+  sameSite: isProduction ? "none" : "lax",
+  secure: isProduction,
+});
+   res.clearCookie("refreshToken", {
+  httpOnly: true,
+  sameSite: isProduction ? "none" : "lax",
+  secure: isProduction,
+});
     return res.status(200).json({
       success: true,
       message: "user logged out succesfully",
