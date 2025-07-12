@@ -16,6 +16,8 @@ import cookieParser from "cookie-parser";
 const app = express();
 //midllewares
 dotenv.config();
+
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -36,7 +38,16 @@ app.use("/api/v1/logs", logsRoutes);
 app.use("/api/v1", passwordRoutes);
 app.use("/api/v1", contactRoutes);
 app.use("/api/v1/ai", airoutes);
-//db connectiopn
-connectDB();
 
+// ✅ Global error handler 
+app.use((err, req, res, next) => {
+  console.error("❌ Global error:", err.message);
+  res.status(err.statusCode || 500).json({
+    success: false,
+    message: err.message || "Internal Server Error",
+  });
+});
+
+//db connection
+connectDB();
 app.listen(process.env.PORT, () => {});

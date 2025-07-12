@@ -32,16 +32,18 @@ const registerUser = async (req, res) => {
     const accessToken = generateAccessToken(user._id);
     const refreshToken = generateRefreshToken(user._id);
 
+    const isProduction = process.env.NODE_ENV === "production";
+
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      sameSite: "None",
-      secure: true,
-      path: "/",
+      sameSite: "lax",
+      secure: isProduction,
     });
+
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      sameSite: "None",
-      secure: true,
+      sameSite: "lax",
+      secure: isProduction,
     });
     const userData = {
       _id: user._id,
@@ -80,16 +82,18 @@ const loginUser = async (req, res) => {
     const accessToken = generateAccessToken(user._id);
     const refreshToken = generateRefreshToken(user._id);
 
+    const isProduction = process.env.NODE_ENV === "production";
+
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      sameSite: "None",
-      secure: false,
-      path: "/",
+      sameSite: "lax",
+      secure: isProduction,
     });
+
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      sameSite: "None",
-      secure: false,
+      sameSite: "lax",
+      secure: isProduction,
     });
     const userdata = {
       _id: user._id,
@@ -158,11 +162,12 @@ const refreshtokens = async (req, res) => {
     const decoded = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
     const newAccesstoken = generateAccessToken(decoded._id);
 
+    const isProduction = process.env.NODE_ENV === "production";
+
     res.cookie("accessToken", newAccesstoken, {
       httpOnly: true,
-      sameSite: "None",
-      secure: true,
-      path: "/",
+      sameSite: "lax",
+      secure: isProduction,
     });
     return res.status(200).json({ success: true, message: "Token refreshed" });
   } catch (error) {
