@@ -3,7 +3,7 @@ import "../styles/hero.css";
 import Tilt from "react-parallax-tilt";
 import { Player } from "@lottiefiles/react-lottie-player";
 import { useNavigate } from "react-router-dom";
-import confetti from "canvas-confetti";
+
 
 const features = [
   {
