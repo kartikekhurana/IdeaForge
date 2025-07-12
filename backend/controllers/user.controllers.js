@@ -34,9 +34,14 @@ const registerUser = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
+      sameSite: "None",
+      secure: true,
+      path: "/",
     });
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
+      sameSite: "None",
+      secure: true,
     });
     const userData = {
       _id: user._id,
@@ -77,13 +82,13 @@ const loginUser = async (req, res) => {
 
     res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "None",
       secure: false,
       path: "/",
     });
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: "None",
       secure: false,
     });
     const userdata = {
@@ -155,8 +160,9 @@ const refreshtokens = async (req, res) => {
 
     res.cookie("accessToken", newAccesstoken, {
       httpOnly: true,
-      sameSite: "lax",
-      secure: false,
+      sameSite: "None",
+      secure: true,
+      path: "/",
     });
     return res.status(200).json({ success: true, message: "Token refreshed" });
   } catch (error) {
