@@ -17,13 +17,12 @@ const app = express();
 //midllewares
 dotenv.config();
 
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://idea-forge-eta.vercel.app"],
+    origin: ["http://localhost:5173", "https://idea-forge-six.vercel.app"],
     credentials: true,
   })
 );
@@ -39,7 +38,7 @@ app.use("/api/v1", passwordRoutes);
 app.use("/api/v1", contactRoutes);
 app.use("/api/v1/ai", airoutes);
 
-// ✅ Global error handler 
+// ✅ Global error handler
 app.use((err, req, res, next) => {
   console.error("❌ Global error:", err.message);
   res.status(err.statusCode || 500).json({

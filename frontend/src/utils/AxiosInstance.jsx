@@ -1,7 +1,7 @@
 import axios from "axios";
 const instance = axios.create({
   baseURL: import.meta.env.PROD
-    ? "https://ideaforge-cfea.onrender.com/api/v1" 
+    ? "https://ideaforge-wn0n.onrender.com/api/v1" 
     : "http://localhost:3000/api/v1",             
   withCredentials: true,
 });
